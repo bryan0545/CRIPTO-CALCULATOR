@@ -6,17 +6,13 @@ import CoinList from './modules/CoinList'
 export default function App() {
   return (
     <View style={styles.container}>
-      <CoinList/>
-      <StatusBar style="auto" />
+      <CoinList/>     
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: 30,
   },
 });

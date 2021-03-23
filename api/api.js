@@ -1,22 +1,25 @@
 import axios from 'axios';
 
 const getCriptoList = async() => {
-    const coins = await(await axios.get("https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=104b97ab-405e-44d6-8ab3-3ff4cfcde0e7")).data.data
+    const coins = await(await axios.get("https://rest.coinapi.io/v1/assets?apikey=B19A3422-6601-4F4A-A352-F298FF0CE694")).data
     const coinList = [];
-    
-    coins.forEach((coin) => {
-        if(coin.name && coin.symbol && coin.quote.USD.price){
-            
+    console.log(coins[1])
+    coins.forEach((coin,index) => {
+       
+        if( coin.asset_id){            
             const newCoin = {
-                "name": coin.name,
-                "symbol": coin.symbol,
-                "price":coin.quote.USD.price,
+                key: index.toString(),
+                name: coin.name|| coin.asset_id,
+                symbol: coin.asset_id,
+                price:coin.price_usd ? Number(coin.price_usd).toFixed(4):0,
+                quantity:0,
+                result:0,
             }
             coinList.push(newCoin)
         }     
     });
 
-    
+    return coinList;    
 }
 
 export default getCriptoList;
